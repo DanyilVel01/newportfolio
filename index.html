@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio | Developer</title>
+  <link rel="stylesheet" href="style.css">
+  
+ 
+  <style>
+    .skill-box {
+      background: var(--card-bg);
+      border: 1px solid #334155;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .skill-selector {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .skill-btn {
+      background: #0f172a;
+      border: 1px solid var(--primary);
+      color: var(--text-main);
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+    .skill-btn:hover, .skill-btn.active {
+      background: var(--primary);
+      color: #0f172a;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    }
+    .skill-display-title {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .progress-bar-bg {
+      background: #0f172a;
+      height: 14px;
+      border-radius: 7px;
+      overflow: hidden;
+      margin: 1rem 0 1.5rem 0;
+      border: 1px solid #334155;
+    }
+    .progress-bar-fill {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      height: 100%;
+      width: 0%;
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .skill-description {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      min-height: 80px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">&lt;MyPortfolio /&gt;</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#terminal">Terminal</a></li>
+      <li><a href="#skills-matrix">Skills Lab</a></li>
+      <li><a href="#projects">Projects</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="about">
+    <div class="hero-text">
+     <h1>Hi, I'm <span id="typewriter" class="typing-text"></span></h1>
+      <p>I build modern websites, services, and Linux-based solutions. Welcome to my digital workspace!</p>
+    </div>
+    <div class="avatar-wrapper">
+      <img src="/img/me.jpg" alt="My photo" class="avatar-img" id="myAvatar">
+    </div>
+  </section>
+  <!-- Custom Glowing Cursor -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-glow"></div>
+  <!-- INTERACTIVE SECTION 1: Terminal -->
+  <section id="terminal">
+    <h2 class="section-title">⚡ Explore My Profile via Console</h2>
+    
+    <div class="terminal-container">
+      <div class="terminal-header">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+        <span class="terminal-title">guest@portfolio-server:~</span>
+      </div>
+      <div class="terminal-body">
+        <p class="terminal-hint">// Click a button below to run a terminal command:</p>
+        
+        <div class="terminal-buttons">
+          <button class="term-btn" onclick="runCommand('skills')">help skills</button>
+          <button class="term-btn" onclick="runCommand('hobby')">cat hobby.txt</button>
+          <button class="term-btn" onclick="runCommand('status')">systemctl status</button>
+          <button class="term-btn" onclick="runCommand('clear')">clear</button>
+        </div>
+
+        <div id="terminal-history"></div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section id="skills-matrix">
+    <h2 class="section-title">🧪 Interactive Skills Lab</h2>
+    
+    <div class="skill-box">
+      <div class="skill-selector">
+        <button class="skill-btn active" onclick="selectSkill('webdev', this)">Web Dev</button>
+        <button class="skill-btn" onclick="selectSkill('linux', this)">Linux & Servers</button>
+        <button class="skill-btn" onclick="selectSkill('git', this)">Git & GitHub</button>
+        <button class="skill-btn" onclick="selectSkill('problem_solving', this)">Problem Solving</button>
+      </div>
+
+      <div class="skill-display">
+        <h3 id="skillTitle" class="skill-display-title">Web Development</h3>
+        <div class="progress-bar-bg">
+          <div id="skillProgress" class="progress-bar-fill" style="width: 85%;"></div>
+        </div>
+        <p id="skillDescription" class="skill-description">
+          Building responsive, modern, and accessible user interfaces using HTML5, CSS3, and modern JavaScript.
+        </p>
+      </div>
+    </div>
+  </section>
+
+<section id="personal-life">
+  <h2 class="section-title">🌱 Beyond The Code</h2>
+  <p class="section-subtitle">Click a topic to discover what drives me outside of work</p>
+  
+  <div class="personal-grid">
+    <div class="personal-card" onclick="openBioModal('setup')">
+      <div class="card-icon">💻</div>
+      <h3>My Ideal Workspace</h3>
+      <p>Click to inspect my daily setup & environment</p>
+    </div>
+
+    <div class="personal-card" onclick="openBioModal('passions')">
+      <div class="card-icon">🎧</div>
+      <h3>Fuel & Passions</h3>
+      <p>Music, podcasts, and what keeps me energized</p>
+    </div>
+
+    <div class="personal-card" onclick="openBioModal('philosophy')">
+      <div class="card-icon">🚀</div>
+      <h3>Life Philosophy</h3>
+      <p>How I approach learning, challenges, and growth</p>
+    </div>
+  </div>
+
+  
+  <div id="bioBox" class="bio-box hidden">
+    <h3 id="bioTitle">Title</h3>
+    <p id="bioContent">Content goes here...</p>
+  </div>
+</section>
+
+
+
+<section id="timeline-section">
+  <h2 class="section-title">🗺️ My Story Timeline</h2>
+  
+  <div class="timeline-container">
+    <div class="timeline-event" onclick="showTimelineDetail('chapter1')">
+      <span class="timeline-date">Phase 01</span>
+      <h4>The Spark</h4>
+      <p>How I got fascinated by computers and digital creation.</p>
+    </div>
+
+    <div class="timeline-event" onclick="showTimelineDetail('chapter2')">
+      <span class="timeline-date">Phase 02</span>
+      <h4>The Deep Dive</h4>
+      <p>Tinkering with code, Linux servers, and web builds.</p>
+    </div>
+
+    <div class="timeline-event" onclick="showTimelineDetail('chapter3')">
+      <span class="timeline-date">Phase 03</span>
+      <h4>Current Horizon</h4>
+      <p>Building real-world projects and learning non-stop.</p>
+    </div>
+  </div>
+
+  <div id="timelineDetail" class="timeline-detail-box">
+    <i>Click any phase above to read the story details.</i>
+  </div>
+</section>
+ 
+  <!-- Projects Section -->
+<section id="projects">
+  <h2 class="section-title">My Projects</h2>
+  <div class="projects-grid">
+    
+   
+    <div class="project-card">
+      <img src="/img/project 1.png" alt="Personal Portfolio Website" class="project-img">
+      <div class="project-info">
+        <h3>E-Commerce Web Application</h3>
+        <p>A collaborative team project focused on building an interactive e-commerce web store.</p>
+        
+        
+        <div class="project-tags">
+          <span class="tag">HTML5/CSS3</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">PHP</span>
+          <span class="tag">BLADE</span>
+        </div>
+
+        
+        <div class="project-links">
+          <a href="https://github.com/RistoT1/Taitaja24-semifinaali-GroupProject" target="_blank" class="proj-btn outline">GitHub Repo</a>
+        </div>
+      </div>
+    </div>
+
+   
+    <div class="project-card">
+      <img src="/img/project 2.png" alt="Linux Server Deployment" class="project-img">
+      <div class="project-info">
+        <h3>Kompassi-project</h3>
+        <p>A commissioned project built in a pair-programming setup. Collaborated with a partner to design and develop a custom web application based on client requirements.</p>
+        
+        <div class="project-tags">
+          <span class="tag">PHP</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">JS</span>
+        </div>
+
+        <div class="project-links">
+          <a href="https://github.com/DanyilVel01/kompassi-project" target="_blank" class="proj-btn outline">GitHub Repo</a>
+        </div>
+      </div>
+    </div>
+
+   
+    <div class="project-card">
+      <img src="/img/project 3.png" alt="Future Web Project" class="project-img">
+      <div class="project-info">
+        <h3>Portfolio Website</h3>
+        <p>An interactive JavaScript application developed as a coursework assignment to practice modern web logic.</p>
+        
+        <div class="project-tags">
+          <span class="tag">JavaScript</span>
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+        </div>
+
+        <div class="project-links">
+          <a href="https://github.com/ВАШ_ЛОГИН" target="_blank" class="proj-btn outline">GitHub Repo</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+  <footer>
+    <p>© 2026 Built with HTML/CSS/JS. Hosted on Linux Palvelu.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
