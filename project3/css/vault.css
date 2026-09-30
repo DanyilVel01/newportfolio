@@ -1,0 +1,570 @@
+/* ==========================================================================
+   THE ARCHIVE VAULT EXPLORER | DEDICATED SECTION STYLES
+   ISOLATED SCOPE: #vaultZoomSection & .vault-*
+   AWWWARDS / BOMBON.RS SCROLL-DRIVEN 3D SHOWCASE EXPERIENCE
+   ========================================================================== */
+
+#vaultZoomSection {
+  position: relative;
+  min-height: 260vh;
+  background-color: #070707;
+  color: #f5f5f5;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  overflow: clip;
+  z-index: 10;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 1. STICKY STAGE CONTAINER (ScrollTrigger Pinned) */
+#vaultZoomSection .vault-stage {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px 32px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* 2. ATMOSPHERIC BACKGROUND EFFECTS */
+#vaultZoomSection .vault-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: center center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#vaultZoomSection .vault-ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 255, 0, 0.16) 0%, rgba(212, 255, 0, 0.03) 45%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 2;
+  transition: background 0.6s ease, transform 0.4s ease;
+}
+
+#vaultZoomSection .vault-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display, 'Cabinet Grotesk', sans-serif);
+  font-size: clamp(70px, 15vw, 210px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.03);
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1;
+  will-change: transform, letter-spacing;
+}
+
+/* 3. TOP HUD STATUS BAR */
+#vaultZoomSection .vault-top-hud {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+#vaultZoomSection .vault-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(20, 20, 20, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(10px);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #a0a0a0;
+}
+
+#vaultZoomSection .vault-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-volt, #d4ff00);
+  box-shadow: 0 0 8px var(--accent-volt, #d4ff00);
+  animation: vaultPulseDot 2s ease infinite alternate;
+}
+
+@keyframes vaultPulseDot {
+  0% { opacity: 0.4; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1.2); }
+}
+
+#vaultZoomSection .vault-header-block {
+  text-align: center;
+}
+
+#vaultZoomSection .vault-eyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-volt, #d4ff00);
+  margin-bottom: 4px;
+}
+
+#vaultZoomSection .vault-title {
+  font-family: var(--font-display, 'Cabinet Grotesk', sans-serif);
+  font-size: clamp(24px, 3.8vw, 44px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #ffffff;
+  margin: 0;
+}
+
+#vaultZoomSection .vault-scroll-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #888888;
+}
+
+#vaultZoomSection .vault-meter-track {
+  width: 90px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+#vaultZoomSection .vault-meter-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--accent-volt, #d4ff00);
+  transition: width 0.15s ease;
+}
+
+/* 4. SHOWCASE VIEWPORT & INTERACTIVE CENTERPIECE */
+#vaultZoomSection .vault-viewport-stage {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 640px;
+  height: 52vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  will-change: transform;
+}
+
+#vaultZoomSection .vault-item-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  cursor: grab;
+}
+
+#vaultZoomSection .vault-item-wrap:active {
+  cursor: grabbing;
+}
+
+#vaultZoomSection .vault-jacket-img {
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  max-height: 480px;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.9));
+  user-select: none;
+  pointer-events: none;
+  transition: filter 0.3s ease;
+  will-change: transform, scale;
+}
+
+/* 5. RADAR HOTSPOTS WITH ROTATING DASHED CIRCLES */
+#vaultZoomSection .vault-hotspot {
+  position: absolute;
+  z-index: 30;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+#vaultZoomSection .vault-hotspot-1 { top: 22%; left: 36%; }
+#vaultZoomSection .vault-hotspot-2 { top: 46%; right: 26%; }
+#vaultZoomSection .vault-hotspot-3 { bottom: 20%; left: 42%; }
+#vaultZoomSection .vault-hotspot-4 { top: 35%; right: 46%; }
+
+#vaultZoomSection .vault-hotspot-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(14, 14, 14, 0.88);
+  border: 1.5px solid var(--accent-volt, #d4ff00);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(212, 255, 0, 0.45);
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease;
+}
+
+#vaultZoomSection .vault-hotspot-btn::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px dashed rgba(212, 255, 0, 0.7);
+  animation: vaultSpin 10s linear infinite;
+}
+
+#vaultZoomSection .vault-hotspot-btn::after {
+  content: '';
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 1px solid var(--accent-volt, #d4ff00);
+  opacity: 0;
+  animation: vaultRadarPulse 2.2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+@keyframes vaultSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes vaultRadarPulse {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+#vaultZoomSection .vault-hotspot:hover .vault-hotspot-btn,
+#vaultZoomSection .vault-hotspot.active .vault-hotspot-btn {
+  transform: scale(1.22);
+  background: var(--accent-volt, #d4ff00);
+}
+
+#vaultZoomSection .vault-hotspot-icon {
+  color: var(--accent-volt, #d4ff00);
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+#vaultZoomSection .vault-hotspot:hover .vault-hotspot-icon,
+#vaultZoomSection .vault-hotspot.active .vault-hotspot-icon {
+  color: #070707;
+}
+
+/* Hotspot Card Popover */
+#vaultZoomSection .vault-card-popover {
+  position: absolute;
+  width: 280px;
+  background: rgba(18, 18, 18, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  padding: 18px 20px;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(12px) scale(0.94);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 40;
+}
+
+#vaultZoomSection .vault-hotspot.active .vault-card-popover,
+#vaultZoomSection .vault-hotspot:hover .vault-card-popover {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+#vaultZoomSection .vault-card-popover.pos-right { left: calc(100% + 18px); top: 50%; transform-origin: left center; }
+#vaultZoomSection .vault-card-popover.pos-left { right: calc(100% + 18px); top: 50%; transform-origin: right center; }
+#vaultZoomSection .vault-card-popover.pos-top { bottom: calc(100% + 18px); left: 50%; transform-origin: center bottom; }
+
+#vaultZoomSection .vault-badge-tag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-volt, #d4ff00);
+  background: rgba(212, 255, 0, 0.12);
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+#vaultZoomSection .vault-card-title {
+  font-family: var(--font-display, 'Cabinet Grotesk', sans-serif);
+  font-size: 16px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+}
+
+#vaultZoomSection .vault-card-desc {
+  font-size: 12px;
+  color: #a0a0a0;
+  line-height: 1.5;
+  margin: 0 0 12px 0;
+}
+
+#vaultZoomSection .vault-card-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#vaultZoomSection .vault-stat-item strong {
+  display: block;
+  font-size: 13px;
+  color: #ffffff;
+  font-weight: 800;
+}
+
+#vaultZoomSection .vault-stat-item span {
+  font-size: 10px;
+  color: #777777;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* 6. BOTTOM INTERACTIVE CONTROL DOCK */
+#vaultZoomSection .vault-bottom-dock {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-top: 12px;
+}
+
+/* Colorway Switcher */
+#vaultZoomSection .vault-color-switcher {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(20, 20, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+  padding: 8px 16px;
+  border-radius: 9999px;
+}
+
+#vaultZoomSection .vault-dock-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #888888;
+}
+
+#vaultZoomSection .vault-swatch-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  padding: 2px;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  position: relative;
+}
+
+#vaultZoomSection .vault-swatch-dot .inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#vaultZoomSection .vault-swatch-dot.active {
+  border-color: var(--accent-volt, #d4ff00);
+  transform: scale(1.15);
+}
+
+/* Tech Spec Quick Tab Buttons */
+#vaultZoomSection .vault-tabs-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(20, 20, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+  padding: 6px 10px;
+  border-radius: 9999px;
+}
+
+#vaultZoomSection .vault-tab-btn {
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #a0a0a0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#vaultZoomSection .vault-tab-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+#vaultZoomSection .vault-tab-btn.active {
+  color: #070707;
+  background: var(--accent-volt, #d4ff00);
+  font-weight: 800;
+}
+
+/* Action & Zoom Buttons */
+#vaultZoomSection .vault-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#vaultZoomSection .vault-zoom-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(20, 20, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+#vaultZoomSection .vault-zoom-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--accent-volt, #d4ff00);
+  color: var(--accent-volt, #d4ff00);
+  transform: scale(1.08);
+}
+
+#vaultZoomSection .vault-order-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 9999px;
+  background: var(--accent-volt, #d4ff00);
+  color: #070707;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(212, 255, 0, 0.3);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#vaultZoomSection .vault-order-btn:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4);
+}
+
+/* 7. RESPONSIVE BREAKPOINTS */
+@media (max-width: 1024px) {
+  #vaultZoomSection .vault-tabs-group {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+  #vaultZoomSection .vault-bottom-dock {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  #vaultZoomSection {
+    min-height: 200vh;
+  }
+  #vaultZoomSection .vault-stage {
+    padding: 16px;
+  }
+  #vaultZoomSection .vault-top-hud {
+    flex-direction: column;
+    gap: 8px;
+  }
+  #vaultZoomSection .vault-scroll-indicator {
+    display: none;
+  }
+  #vaultZoomSection .vault-viewport-stage {
+    height: 44vh;
+  }
+  #vaultZoomSection .vault-hotspot-btn {
+    width: 34px;
+    height: 34px;
+  }
+  #vaultZoomSection .vault-card-popover {
+    width: 240px;
+    padding: 14px;
+  }
+  #vaultZoomSection .vault-card-popover.pos-left,
+  #vaultZoomSection .vault-card-popover.pos-right {
+    left: 50% !important;
+    right: auto !important;
+    top: calc(100% + 14px) !important;
+    transform-origin: center top !important;
+    transform: translateX(-50%) translateY(8px) scale(0.95);
+  }
+  #vaultZoomSection .vault-hotspot.active .vault-card-popover {
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  #vaultZoomSection .vault-tabs-group {
+    display: none;
+  }
+}

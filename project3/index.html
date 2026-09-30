@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VALENCE ARCHIVE | Engineered Streetwear & Technical Footwear</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@700;800;900&family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <!-- Separated Modular Stylesheet (Nike Design System + GSAP / Bombon.rs Animations) -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Custom Awwwards / Bombon.rs Fluid Cursor -->
+  <div id="cursorDot" class="custom-cursor-dot"></div>
+  <div id="cursorRing" class="custom-cursor-ring"></div>
+
+  <!-- 1. NIKE-STYLE UTILITY STRIP -->
+  <div class="utility-bar">
+    <div class="utility-brand-mark">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      VALENCE ARCHIVE LABS
+    </div>
+    <div class="utility-links">
+      <a href="#vaultZoomSection">Archive Vault</a>
+      <a href="#lookbook">Lookbook '26</a>
+      <a href="#faq">Help & Sizing</a>
+      <a href="#" onclick="openWishlist(); return false;">Wishlist (<span class="wishlist-text-count">0</span>)</a>
+      <div class="currency-selector-wrapper">
+        <label for="currencySelect">Currency:</label>
+        <select id="currencySelect" class="currency-select" onchange="changeCurrency(this.value)">
+          <option value="USD">USD ($)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="GBP">GBP (£)</option>
+          <option value="RUB">RUB (₽)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. ANNOUNCEMENT TICKER -->
+  <div class="ticker-bar">
+    <div class="ticker-slide">
+      <span>FREE EXPRESS SHIPPING ON ORDERS OVER <span id="tickerFreeShipText">$150</span></span>
+      <span>•</span>
+      <span>DROP 05: TOKYO & BERLIN NOW LIVE</span>
+      <span>•</span>
+      <span class="highlight">USE CODE: STREET20 FOR 20% OFF</span>
+    </div>
+  </div>
+
+  <!-- 3. STICKY HEADER -->
+  <header class="header">
+    <div class="container header-inner">
+      <!-- Mobile Menu Hamburger -->
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle Navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo" onclick="filterCategory('all'); return false;">
+        <div class="brand-symbol">V</div>
+        VALENCE
+      </a>
+
+      <!-- Desktop Nav Categories -->
+      <nav class="nav-menu">
+        <a href="#catalog" class="nav-link active" onclick="filterCategory('all')">All Styles</a>
+        <a href="#catalog" class="nav-link" onclick="filterCategory('hoodies')">Hoodies & Fleece</a>
+        <a href="#catalog" class="nav-link" onclick="filterCategory('outerwear')">Outerwear</a>
+        <a href="#catalog" class="nav-link" onclick="filterCategory('tshirts')">T-Shirts & Tops</a>
+        <a href="#catalog" class="nav-link" onclick="filterCategory('pants')">Pants & Cargo</a>
+        <a href="#catalog" class="nav-link" onclick="filterCategory('footwear')">Footwear</a>
+        <a href="#catalog" class="nav-link" onclick="filterCategory('accessories')">Accessories</a>
+        <a href="#catalog" class="nav-link sale" onclick="filterSaleOnly()">Sale Drop</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="header-actions">
+        <div class="search-box-wrapper">
+          <svg class="search-icon-inside" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search 60 styles..." oninput="handleSearch(this.value)" />
+        </div>
+
+        <button class="action-btn" onclick="openWishlist()" title="Favorites / Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span class="badge-counter wishlist-counter">0</span>
+        </button>
+
+        <button class="action-btn" onclick="openBag()" title="Shopping Bag">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="badge-counter cart-counter">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU DRAWER -->
+  <div id="mobileMenuDrawer" class="mobile-menu-drawer">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <div class="brand-logo"><div class="brand-symbol">V</div> VALENCE</div>
+      <button class="drawer-close-btn" onclick="toggleMobileMenu()">✕</button>
+    </div>
+    <ul class="mobile-nav-list">
+      <li><a href="#catalog" onclick="filterCategory('all'); toggleMobileMenu();">All Styles (60)</a></li>
+      <li><a href="#catalog" onclick="filterCategory('hoodies'); toggleMobileMenu();">Hoodies & Sweats</a></li>
+      <li><a href="#catalog" onclick="filterCategory('outerwear'); toggleMobileMenu();">Outerwear & Jackets</a></li>
+      <li><a href="#catalog" onclick="filterCategory('tshirts'); toggleMobileMenu();">T-Shirts & Tops</a></li>
+      <li><a href="#catalog" onclick="filterCategory('pants'); toggleMobileMenu();">Cargo & Pants</a></li>
+      <li><a href="#catalog" onclick="filterCategory('footwear'); toggleMobileMenu();">Footwear</a></li>
+      <li><a href="#catalog" onclick="filterCategory('accessories'); toggleMobileMenu();">Accessories</a></li>
+      <li><a href="#vaultZoomSection" onclick="toggleMobileMenu();">Archive Vault 3D</a></li>
+      <li><a href="#lookbook" onclick="toggleMobileMenu();">Lookbook '26</a></li>
+      <li><a href="#faq" onclick="toggleMobileMenu();">Customer Support</a></li>
+    </ul>
+  </div>
+
+  <!-- 4. HERO SECTION WITH BOMBON.RS FLOATING TECH PILLS -->
+  <section class="hero-section" id="heroSection">
+    <div class="hero-bg-overlay"></div>
+
+    <!-- Bombon.rs inspired Floating Tech Elements with continuous sine-wave physics & mouse parallax -->
+    <div class="hero-floating-container" id="heroFloaters">
+      <div class="hero-float-pill pill-1" data-speed="2.4">
+        <span class="pill-glow"></span>
+        <span>520 GSM LOOPBACK FLEECE</span>
+      </div>
+      <div class="hero-float-pill pill-2" data-speed="-2.0">
+        <span class="pill-glow" style="background:#00f0ff; box-shadow:0 0 8px #00f0ff;"></span>
+        <span>GORE-TEX 3L PRO SHELL</span>
+      </div>
+      <div class="hero-float-pill pill-3" data-speed="3.6">
+        <span class="pill-glow" style="background:#ff3333; box-shadow:0 0 8px #ff3333;"></span>
+        <span>35.6764° N // TOKYO LAB</span>
+      </div>
+      <div class="hero-float-pill pill-4" data-speed="-2.6">
+        <span class="pill-glow"></span>
+        <span>VIBRAM MEGAGRIP OUTSOLE</span>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span class="dot"></span>
+          Archive '26 • Global Release
+        </div>
+        <h1 class="hero-title">
+          ENGINEERED <br>FOR THE <span class="accent">STREETS.</span>
+        </h1>
+        <p class="hero-description">
+          Heavyweight Japanese 520 GSM fleece, 3-layer weatherproof GORE-TEX shells, and sculptural footwear designed for the urban frontier.
+        </p>
+        <div class="hero-cta-group">
+          <a href="#catalog" class="btn btn-primary" onclick="filterCategory('all')">Shop The 60 Styles</a>
+          <a href="#vaultZoomSection" class="btn btn-secondary">Explore Vault 3D</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       5. SIGNATURE BOMBON.RS PINNED SCROLL ZOOM & INTERACTIVE HOTSPOTS SECTION
+       ========================================================================== -->
+  <section class="vault-zoom-section" id="vaultZoomSection">
+    <div class="vault-sticky-container" id="vaultSticky">
+      
+      <!-- Ambient Glow & Watermark -->
+      <div class="vault-ambient-glow" id="vaultGlow"></div>
+      <div class="vault-watermark" id="vaultWatermark">VALENCE ARCHIVE LABS // 2026</div>
+
+      <!-- Header -->
+      <div class="vault-header-wrap">
+        <div class="vault-eyebrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          FLAGSHIP SPECIFICATION // SCROLL TO ZOOM
+        </div>
+        <h2 class="vault-headline">THE ARCHIVE VAULT EXPLORER</h2>
+      </div>
+
+      <!-- Centerpiece with Interactive Radar Hotspots -->
+      <div class="vault-showcase-stage">
+        <img 
+          src="https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=1000&q=80" 
+          alt="Valence Flagship 3L Storm Parka" 
+          class="vault-jacket-img" 
+          id="vaultJacket" 
+        />
+
+        <!-- Hotspot 1: Storm Hood & Membrane -->
+        <div class="hotspot-pin hotspot-pin-1" onclick="toggleHotspot(this)">
+          <div class="hotspot-trigger">
+            <span class="hotspot-icon">+</span>
+          </div>
+          <div class="hotspot-card pos-right">
+            <div class="hotspot-tag">MEMBRANE TECH</div>
+            <h4 class="hotspot-title">3-Layer GORE-TEX Pro</h4>
+            <p class="hotspot-desc">28,000mm hydrostatic water column with micro-taped seams for absolute downpour immunity in sub-zero climates.</p>
+          </div>
+        </div>
+
+        <!-- Hotspot 2: Magnetic Hardware -->
+        <div class="hotspot-pin hotspot-pin-2" onclick="toggleHotspot(this)">
+          <div class="hotspot-trigger">
+            <span class="hotspot-icon">+</span>
+          </div>
+          <div class="hotspot-card pos-left">
+            <div class="hotspot-tag">HARDWARE</div>
+            <h4 class="hotspot-title">German Fidlock® V-Buckles</h4>
+            <p class="hotspot-desc">Mechanical magnetic closure designed for one-handed release with gloves in urban and alpine conditions.</p>
+          </div>
+        </div>
+
+        <!-- Hotspot 3: Modular Storage -->
+        <div class="hotspot-pin hotspot-pin-3" onclick="toggleHotspot(this)">
+          <div class="hotspot-trigger">
+            <span class="hotspot-icon">+</span>
+          </div>
+          <div class="hotspot-card pos-top">
+            <div class="hotspot-tag">MODULAR STORAGE</div>
+            <h4 class="hotspot-title">Welded AquaGuard Pockets</h4>
+            <p class="hotspot-desc">Dual internal security sleeves with RFID-blocking mesh to shield electronics and passports from moisture and scanners.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       6. BOMBON.RS INFINITE MARQUEE VELOCITY RIBBON
+       ========================================================================== -->
+  <section class="marquee-ribbon-section">
+    <div class="marquee-track" id="marqueeTrack">
+      <div class="marquee-content">
+        <span>VALENCE ARCHIVE LABS</span>
+        <span class="star">★</span>
+        <span>DROP 05 AVAILABLE NOW</span>
+        <span class="star">★</span>
+        <span>520 GSM JAPANESE COTTON</span>
+        <span class="star">★</span>
+        <span>SCIENTIFICALLY ENGINEERED FOR STREETS</span>
+        <span class="star">★</span>
+        <span>LIMITED 100 PIECES PER COLORWAY</span>
+        <span class="star">★</span>
+        <span>WORLDWIDE DHL EXPRESS SHIPPING</span>
+        <span class="star">★</span>
+      </div>
+      <div class="marquee-content">
+        <span>VALENCE ARCHIVE LABS</span>
+        <span class="star">★</span>
+        <span>DROP 05 AVAILABLE NOW</span>
+        <span class="star">★</span>
+        <span>520 GSM JAPANESE COTTON</span>
+        <span class="star">★</span>
+        <span>SCIENTIFICALLY ENGINEERED FOR STREETS</span>
+        <span class="star">★</span>
+        <span>LIMITED 100 PIECES PER COLORWAY</span>
+        <span class="star">★</span>
+        <span>WORLDWIDE DHL EXPRESS SHIPPING</span>
+        <span class="star">★</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. CATEGORY QUICK CHIPS -->
+  <div class="quick-category-bar">
+    <div class="container">
+      <div class="quick-chips-wrapper">
+        <button class="quick-chip active" data-cat="all" onclick="filterCategory('all')">All Products (60)</button>
+        <button class="quick-chip" data-cat="hoodies" onclick="filterCategory('hoodies')">Hoodies & Fleece (12)</button>
+        <button class="quick-chip" data-cat="outerwear" onclick="filterCategory('outerwear')">Jackets & Shells (10)</button>
+        <button class="quick-chip" data-cat="tshirts" onclick="filterCategory('tshirts')">T-Shirts & Tops (12)</button>
+        <button class="quick-chip" data-cat="pants" onclick="filterCategory('pants')">Pants & Cargo (10)</button>
+        <button class="quick-chip" data-cat="footwear" onclick="filterCategory('footwear')">Sneakers & Kicks (8)</button>
+        <button class="quick-chip" data-cat="accessories" onclick="filterCategory('accessories')">Headwear & Bags (8)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. CATALOG & FILTER SYSTEM -->
+  <section id="catalog" class="catalog-section">
+    <div class="container">
+      <!-- Toolbar -->
+      <div class="catalog-header">
+        <div class="catalog-heading-wrap">
+          <h2 id="catalogTitle">All Apparel & Footwear</h2>
+          <p id="catalogCountText">Showing 60 of 60 items</p>
+        </div>
+        <div class="catalog-actions-bar">
+          <button class="filter-toggle-btn" onclick="toggleFilterSidebar()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+            <span id="filterToggleText">Hide Filters</span>
+          </button>
+          
+          <div class="sort-select-wrapper">
+            <label for="sortSelect">Sort By:</label>
+            <select id="sortSelect" class="sort-select" onchange="handleSortChange(this.value)">
+              <option value="featured">Featured</option>
+              <option value="newest">Newest Drops</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Layout: Sidebar + Grid -->
+      <div id="catalogLayout" class="catalog-layout show-sidebar">
+        
+        <!-- Filter Sidebar -->
+        <aside class="filter-sidebar">
+          
+          <!-- Gender/Style -->
+          <div class="filter-group">
+            <h4 class="filter-title">Gender & Fit</h4>
+            <div class="filter-checkbox-list">
+              <label class="filter-checkbox-item">
+                <input type="checkbox" value="Unisex" onchange="handleFilterUpdate()">
+                <span>Unisex</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="checkbox" value="Men" onchange="handleFilterUpdate()">
+                <span>Men</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="checkbox" value="Women" onchange="handleFilterUpdate()">
+                <span>Women</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Price Range -->
+          <div class="filter-group">
+            <h4 class="filter-title">Shop by Price</h4>
+            <div class="filter-checkbox-list">
+              <label class="filter-checkbox-item">
+                <input type="radio" name="priceRange" value="all" checked onchange="handleFilterUpdate()">
+                <span>All Prices</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="priceRange" value="under-75" onchange="handleFilterUpdate()">
+                <span>Under $75</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="priceRange" value="75-150" onchange="handleFilterUpdate()">
+                <span>$75 - $150</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="priceRange" value="150-250" onchange="handleFilterUpdate()">
+                <span>$150 - $250</span>
+              </label>
+              <label class="filter-checkbox-item">
+                <input type="radio" name="priceRange" value="250-plus" onchange="handleFilterUpdate()">
+                <span>$250 & Above</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Color Palette -->
+          <div class="filter-group">
+            <h4 class="filter-title">Colorway</h4>
+            <div class="filter-swatches">
+              <button class="color-swatch-btn" onclick="toggleColorFilter('Black', this)">
+                <div class="color-swatch-circle" style="background:#0a0a0a;"></div>
+                <span>Black</span>
+              </button>
+              <button class="color-swatch-btn" onclick="toggleColorFilter('Bone', this)">
+                <div class="color-swatch-circle" style="background:#e8e4dc;"></div>
+                <span>Bone</span>
+              </button>
+              <button class="color-swatch-btn" onclick="toggleColorFilter('Olive', this)">
+                <div class="color-swatch-circle" style="background:#4b5320;"></div>
+                <span>Olive</span>
+              </button>
+              <button class="color-swatch-btn" onclick="toggleColorFilter('Grey', this)">
+                <div class="color-swatch-circle" style="background:#777777;"></div>
+                <span>Grey</span>
+              </button>
+              <button class="color-swatch-btn" onclick="toggleColorFilter('Volt', this)">
+                <div class="color-swatch-circle" style="background:#d4ff00;"></div>
+                <span>Volt</span>
+              </button>
+              <button class="color-swatch-btn" onclick="toggleColorFilter('Red', this)">
+                <div class="color-swatch-circle" style="background:#e02424;"></div>
+                <span>Red</span>
+              </button>
+              <button class="color-swatch-btn" onclick="toggleColorFilter('Sand', this)">
+                <div class="color-swatch-circle" style="background:#c2b280;"></div>
+                <span>Sand</span>
+              </button>
+              <button class="color-swatch-btn" onclick="toggleColorFilter('White', this)">
+                <div class="color-swatch-circle" style="background:#ffffff;"></div>
+                <span>White</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Size Filter -->
+          <div class="filter-group">
+            <h4 class="filter-title">Sizes</h4>
+            <div class="filter-size-grid">
+              <button class="size-filter-chip" onclick="toggleSizeFilter('XS', this)">XS</button>
+              <button class="size-filter-chip" onclick="toggleSizeFilter('S', this)">S</button>
+              <button class="size-filter-chip" onclick="toggleSizeFilter('M', this)">M</button>
+              <button class="size-filter-chip" onclick="toggleSizeFilter('L', this)">L</button>
+              <button class="size-filter-chip" onclick="toggleSizeFilter('XL', this)">XL</button>
+              <button class="size-filter-chip" onclick="toggleSizeFilter('XXL', this)">XXL</button>
+            </div>
+          </div>
+
+          <!-- Quick Reset -->
+          <div>
+            <button class="btn btn-secondary" style="width:100%; border-color:#ccc; color:#111;" onclick="resetAllFilters()">
+              Reset Filters
+            </button>
+          </div>
+
+        </aside>
+
+        <!-- Product Cards Grid -->
+        <main class="products-grid" id="productsGrid">
+          <!-- 60 Product items will be rendered here dynamically via JS -->
+        </main>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. LOOKBOOK & EDITORIAL SHOWCASE -->
+  <section id="lookbook" class="lookbook-section">
+    <div class="container">
+      <div class="lookbook-header">
+        <span class="lookbook-city">ARCHIVE VISUAL DISPATCH</span>
+        <h2>STREETS WORLDWIDE</h2>
+        <p style="color: #a0a0a0; font-size: 15px;">
+          Capturing our Drop 05 technical silhouettes across Tokyo, Berlin, London, and New York. Engineered for sub-zero winds and metropolitan movement.
+        </p>
+      </div>
+
+      <div class="lookbook-grid">
+        <div class="lookbook-card">
+          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80" alt="Tokyo Shinjuku Look" />
+          <div class="lookbook-overlay">
+            <span class="lookbook-city">TOKYO / SHINJUKU</span>
+            <div class="lookbook-title">Modular Shell & Parachute Cargo</div>
+          </div>
+        </div>
+        <div class="lookbook-card">
+          <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=700&q=80" alt="Berlin Kreuzberg Look" />
+          <div class="lookbook-overlay">
+            <span class="lookbook-city">BERLIN / KREUZBERG</span>
+            <div class="lookbook-title">520 GSM Boxy Fleece & Beanie</div>
+          </div>
+        </div>
+        <div class="lookbook-card">
+          <img src="https://images.unsplash.com/photo-1508427953056-b00b8d78ebf5?auto=format&fit=crop&w=700&q=80" alt="London Soho Look" />
+          <div class="lookbook-overlay">
+            <span class="lookbook-city">LONDON / SOHO</span>
+            <div class="lookbook-title">Tactical Bomber & Cyber Runners</div>
+          </div>
+        </div>
+        <div class="lookbook-card">
+          <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=700&q=80" alt="New York Brooklyn Look" />
+          <div class="lookbook-overlay">
+            <span class="lookbook-city">NEW YORK / BUSHWICK</span>
+            <div class="lookbook-title">Acid Washed Oversized Graphic Top</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. BRAND FAQ ACCORDION -->
+  <section id="faq" class="faq-section">
+    <div class="container">
+      <div class="faq-wrapper">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question-btn" onclick="toggleFaq(this)">
+              <span>What makes VALENCE ARCHIVE garments unique?</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+            <div class="faq-answer">
+              Every garment in our catalog is engineered with custom mill-woven fabrics, including 500+ GSM loopback French Terry, water-impermeable 3-layer GORE-TEX membranes, and industrial YKK hardware. Our cuts prioritize modern oversized architecture with drop shoulders and articulated joints.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question-btn" onclick="toggleFaq(this)">
+              <span>How do VALENCE sizes run? (Fit Guide)</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+            <div class="faq-answer">
+              Our apparel is intentionally cut with a streetwear-forward, boxy, relaxed fit. If you prefer the intended oversized streetwear drape, select your true standard size. If you prefer a tailored or slimmer fit, we suggest ordering one size down. Footwear fits true to standard Nike sizing.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question-btn" onclick="toggleFaq(this)">
+              <span>What is your worldwide shipping & returns policy?</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+            <div class="faq-answer">
+              We offer Free Express Worldwide Shipping on all orders over $150 (delivered in 2–4 business days via DHL Express). Returns are accepted within 30 days of delivery in unworn condition with original security tags intact.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question-btn" onclick="toggleFaq(this)">
+              <span>How do I care for 500+ GSM heavyweight fleece and technical shells?</span>
+              <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+            <div class="faq-answer">
+              Wash inside-out with cold water on a gentle cycle. Hang dry or lay flat out of direct sunlight to preserve cotton density and vintage pigment dyes. For technical outerwear shells, wipe down with a damp cloth or use dedicated technical garment wash to preserve DWR coatings.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. NIKE-STYLE FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-col-header">VALENCE ARCHIVE</div>
+          <ul class="footer-links">
+            <li><a href="#catalog" onclick="filterCategory('hoodies')">Heavyweight Fleece</a></li>
+            <li><a href="#catalog" onclick="filterCategory('outerwear')">Technical Shells</a></li>
+            <li><a href="#catalog" onclick="filterCategory('footwear')">Footwear Division</a></li>
+            <li><a href="#catalog" onclick="filterCategory('pants')">Modular Bottoms</a></li>
+            <li><a href="#lookbook">Lookbook Dispatch</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-header">CUSTOMER CARE</div>
+          <ul class="footer-links">
+            <li><a href="#faq">Order Tracking</a></li>
+            <li><a href="#faq">Shipping & Delivery</a></li>
+            <li><a href="#faq">Returns & Exchanges</a></li>
+            <li><a href="#faq">Size & Fit Guide</a></li>
+            <li><a href="#faq">Contact Support</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-header">MEMBER BENEFITS</div>
+          <ul class="footer-links">
+            <li><a href="#" onclick="showToast('Member drop notifications enabled.'); return false;">Exclusive Early Drops</a></li>
+            <li><a href="#" onclick="showToast('Promo code STREET20 copied!'); return false;">Member 20% Discount</a></li>
+            <li><a href="#" onclick="showToast('Valence Lab access granted.'); return false;">Archival Access</a></li>
+            <li><a href="#" onclick="showToast('VIP Concierge active.'); return false;">VIP Concierge</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-header">STAY CONNECTED</div>
+          <p style="color:#888; margin-bottom: 12px; font-size:12px;">Get drop alerts and secret archival access directly to your inbox.</p>
+          <div style="display:flex; gap:8px;">
+            <input type="email" placeholder="Enter your email" style="background:#222; border:1px solid #333; color:#fff; padding:8px 12px; border-radius:6px; font-size:12px; flex:1;" id="newsletterInput">
+            <button style="background:#fff; color:#111; font-weight:700; padding:8px 14px; border-radius:6px; font-size:12px;" onclick="handleNewsletter()">Join</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          <span class="brand">VALENCE ARCHIVE LABS © 2026</span>
+          <span>All Rights Reserved. Engineered for Global Movement.</span>
+        </div>
+        <div style="display:flex; gap:20px;">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Sale</a>
+          <a href="#">Supply Chain Ethics</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       12. DEDICATED PRODUCT DETAILS MODAL (PDP - NIKE STYLE)
+       ========================================================================== -->
+  <div id="pdpModal" class="pdp-modal" onclick="closePdpOutside(event)">
+    <div class="pdp-modal-dialog" id="pdpModalDialog">
+      <button class="pdp-close-btn" onclick="closePdp()" title="Close details">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="pdp-container" id="pdpDynamicContent">
+        <!-- Rendered dynamically by openPdp(productId) in js/app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       13. SHOPPING BAG DRAWER
+       ========================================================================== -->
+  <div id="drawerOverlay" class="drawer-overlay" onclick="closeDrawers()"></div>
+
+  <aside id="bagDrawer" class="drawer">
+    <div class="drawer-header">
+      <div class="drawer-title">Shopping Bag (<span class="cart-counter">0</span>)</div>
+      <button class="drawer-close-btn" onclick="closeDrawers()">✕</button>
+    </div>
+
+    <!-- Free Shipping Bar -->
+    <div class="shipping-meter">
+      <div id="shippingThresholdNotice">Add <span id="shippingLeftText">$150</span> more to unlock <strong>FREE EXPRESS SHIPPING</strong></div>
+      <div class="shipping-bar-track">
+        <div id="shippingBarFill" class="shipping-bar-fill"></div>
+      </div>
+    </div>
+
+    <!-- Bag Items -->
+    <div id="bagItemsList" class="drawer-items-list">
+      <!-- Items dynamically populated via js/app.js -->
+    </div>
+
+    <!-- Bag Footer -->
+    <div class="drawer-footer">
+      <div class="promo-input-row">
+        <input type="text" id="promoInput" class="promo-input" placeholder="Promo code (try STREET20)">
+        <button class="promo-apply-btn" onclick="applyPromoCode()">Apply</button>
+      </div>
+
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span id="bagSubtotal">$0.00</span>
+      </div>
+      <div class="summary-row" id="bagDiscountRow" style="display:none; color:#10b981;">
+        <span>Discount (STREET20)</span>
+        <span id="bagDiscount">-$0.00</span>
+      </div>
+      <div class="summary-row">
+        <span>Estimated Shipping</span>
+        <span id="bagShipping">Calculated</span>
+      </div>
+      <div class="summary-row total">
+        <span>Total</span>
+        <span id="bagTotal">$0.00</span>
+      </div>
+
+      <button class="checkout-btn" onclick="proceedToCheckout()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="10" y1="10" x2="23" y2="10"></line></svg>
+        Checkout with Express Pay
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       14. WISHLIST DRAWER
+       ========================================================================== -->
+  <aside id="wishlistDrawer" class="drawer">
+    <div class="drawer-header">
+      <div class="drawer-title">Saved Items (<span class="wishlist-counter">0</span>)</div>
+      <button class="drawer-close-btn" onclick="closeDrawers()">✕</button>
+    </div>
+
+    <div id="wishlistItemsList" class="drawer-items-list">
+      <!-- Items populated via js/app.js -->
+    </div>
+
+    <div class="drawer-footer">
+      <button class="btn btn-black" style="width:100%;" onclick="addAllWishlistToBag()">Move All Available to Bag</button>
+    </div>
+  </aside>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="toast">
+    <svg class="toast-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+    <span id="toastMessage">Item added to your bag</span>
+  </div>
+
+  <!-- BOMBON.RS AUDIO VISUALIZER TOGGLE BUTTON -->
+  <button id="audioAmbientBtn" class="audio-ambient-btn" onclick="toggleAmbientAudio()" title="Toggle Atmospheric Streetwear Ambient Soundscape">
+    <div class="audio-bars">
+      <span class="audio-bar"></span>
+      <span class="audio-bar"></span>
+      <span class="audio-bar"></span>
+      <span class="audio-bar"></span>
+    </div>
+    <span id="audioLabel" class="audio-label">Sound: OFF</span>
+  </button>
+
+  <!-- FLOATING SPINNING STAMP BADGE (Bombon.rs Inspired) -->
+  <div id="spinBadge" class="floating-spin-badge" onclick="scrollToCatalog()" title="Scroll to Archive Catalog">
+    <svg class="spin-text-svg" viewBox="0 0 100 100">
+      <defs>
+        <path id="circlePath" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" />
+      </defs>
+      <text font-size="11">
+        <textPath href="#circlePath" startOffset="0%">
+          • VALENCE LABS • STREETWEAR 2026 •
+        </textPath>
+      </text>
+    </svg>
+    <div class="spin-inner-mark">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="7 13 12 18 17 13"></polyline>
+        <polyline points="7 6 12 11 17 6"></polyline>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       EXTERNAL LIBRARIES: GSAP & LENIS SMOOTH SCROLL (Awwwards / Bombon.rs Stack)
+       ========================================================================== -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+
+  <!-- ==========================================================================
+       SEPARATED MODULAR JAVASCRIPT FILES
+       ========================================================================== -->
+  <!-- 1. Catalog Data: 60 unique AI-created streetwear products & Currency Engine -->
+  <script src="js/products.js"></script>
+
+  <!-- 2. Motion Engine: Lenis, Custom Cursor, Pinned Zoom, Hotspots, 3D Tilt, Audio -->
+  <script src="js/animations.js"></script>
+
+  <!-- 3. App Core Logic: Filters, Nike PDP Modal, Shopping Bag & Wishlist -->
+  <script src="js/app.js"></script>
+</body>
+</html>
